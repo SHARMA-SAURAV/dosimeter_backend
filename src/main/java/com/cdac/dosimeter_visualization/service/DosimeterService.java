@@ -20,9 +20,9 @@ public class DosimeterService {
     private final Set<String> stoppedDevices = new HashSet<>();
 
     public void addReading(DosimeterReading reading) {
-        dataMap.computeIfAbsent(reading.getDeviceId(), k -> new ArrayList<>()).add(reading);
-        lastUpdate.put(reading.getDeviceId(), LocalDateTime.now());
-        stoppedDevices.remove(reading.getDeviceId());
+        dataMap.computeIfAbsent(String.valueOf(reading.getId()), k -> new ArrayList<>()).add(reading);
+        lastUpdate.put(String.valueOf(reading.getId()), LocalDateTime.now());
+        stoppedDevices.remove(reading.getId());
     }
 
     public List<DosimeterReading> getDeviceData(String id) {
