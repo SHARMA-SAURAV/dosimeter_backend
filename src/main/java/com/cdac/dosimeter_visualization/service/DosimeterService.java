@@ -4,7 +4,9 @@ package com.cdac.dosimeter_visualization.service;
 
 //import com.example.dosimeter.model.DosimeterReading;
 import com.cdac.dosimeter_visualization.model.DosimeterReading;
+import com.cdac.dosimeter_visualization.repository.DosimeterRepository;
 import jakarta.annotation.PostConstruct;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
@@ -14,6 +16,9 @@ import java.util.concurrent.ConcurrentHashMap;
 
 @Service
 public class DosimeterService {
+
+    @Autowired
+    private DosimeterRepository dosimeterRepository;
 
     private final Map<String, List<DosimeterReading>> dataMap = new ConcurrentHashMap<>();
     private final Map<String, LocalDateTime> lastUpdate = new ConcurrentHashMap<>();
@@ -34,6 +39,10 @@ public class DosimeterService {
         active.removeAll(stoppedDevices);
         return active;
     }
+    public List<DosimeterReading> getReadingsByDeviceId(String deviceId) {
+        return dosimeterRepository.findByDeviceId(deviceId);
+    }
+
 
     public Set<String> getStoppedDevices() {
         return new HashSet<>(stoppedDevices);

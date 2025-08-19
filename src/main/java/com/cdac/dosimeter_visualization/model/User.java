@@ -2,6 +2,7 @@ package com.cdac.dosimeter_visualization.model;
 
 //package com.cdac.dosimeter_visualization.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -25,6 +26,7 @@ public class User {
 //    private boolean enabled; // Indicates if the user account is active
     private String sex;
     private String phoneNo;
+    @JsonIgnore
     @OneToMany(mappedBy = "user")
     private List<DosimeterAssignment> assignments;
 

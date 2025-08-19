@@ -1,5 +1,6 @@
 package com.cdac.dosimeter_visualization.controller;
 
+import com.cdac.dosimeter_visualization.model.DemoJson;
 import com.cdac.dosimeter_visualization.model.User;
 import com.cdac.dosimeter_visualization.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,12 +27,18 @@ public class AdminController {
         // For now, we will return a placeholder response.
         return ResponseEntity.ok(users);
     }
-    @PostMapping("add/userdata")
+
+    @PostMapping("/add/userdata")
     ResponseEntity<?> addUserData(User user) {
 
 
 
         return ResponseEntity.ok("User added successfully");
+    }
+
+    @GetMapping("/get/json")
+    ResponseEntity<DemoJson> getJsonDate(){
+        return ResponseEntity.ok(new DemoJson());
     }
 
 }

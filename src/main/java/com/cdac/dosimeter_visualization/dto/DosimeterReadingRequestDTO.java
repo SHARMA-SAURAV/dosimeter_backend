@@ -15,4 +15,7 @@ public class DosimeterReadingRequestDTO {
     private String time;
     private String battery;
     private String status;
+
+    // Getters and Setters
 }
+

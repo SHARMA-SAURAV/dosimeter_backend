@@ -38,7 +38,7 @@ private JwtUtil jwtUtil;
         Optional<User> existingUser = userRepository.findByEmail(email);
 //        System.err.println("Existing User: " + existingUser);
         if(existingUser.isPresent()){
-            throw new RuntimeException("User Already Exist");
+            throw new RuntimeException("User Already Exists");
         }
         User user = new User();
         user.setName(name);
