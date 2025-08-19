@@ -20,5 +20,6 @@ public class Dosimeter {
 
     @OneToMany(mappedBy = "dosimeter")
     private List<DosimeterAssignment> assignments;
+
 }
 
