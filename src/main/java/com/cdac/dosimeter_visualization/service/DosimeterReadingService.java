@@ -35,11 +35,11 @@ public class DosimeterReadingService {
         DosimeterAssignment assignment = optionalAssignment.get();
 
         DosimeterReading reading = new DosimeterReading();
-        reading.setCpm(dto.getCpm());
-        reading.setDate(LocalDate.parse(dto.getDate()));
-        reading.setTime(LocalTime.parse(dto.getTime()));
-        reading.setBattery(dto.getBattery());
-        reading.setStatus(dto.getStatus());
+        reading.setCpm(Double.parseDouble(dto.getCpm()));
+//        reading.setDate(LocalDate.parse(dto.getDate()));
+//        reading.setTime(LocalTime.parse(dto.getTime()));
+        reading.setBattery(Integer.parseInt(dto.getBattery()));
+        reading.setStatus(DosimeterReading.Status.valueOf(dto.getStatus()));
         reading.setAssignment(assignment);
         readingRepo.save(reading);
 

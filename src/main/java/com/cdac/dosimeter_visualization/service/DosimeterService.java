@@ -3,6 +3,7 @@ package com.cdac.dosimeter_visualization.service;
 //package com.example.dosimeter.service;
 
 //import com.example.dosimeter.model.DosimeterReading;
+import com.cdac.dosimeter_visualization.model.Dosimeter;
 import com.cdac.dosimeter_visualization.model.DosimeterReading;
 import com.cdac.dosimeter_visualization.repository.DosimeterRepository;
 import jakarta.annotation.PostConstruct;
@@ -39,7 +40,7 @@ public class DosimeterService {
         active.removeAll(stoppedDevices);
         return active;
     }
-    public List<DosimeterReading> getReadingsByDeviceId(String deviceId) {
+    public Optional<Dosimeter> getReadingsByDeviceId(String deviceId) {
         return dosimeterRepository.findByDeviceId(deviceId);
     }
 

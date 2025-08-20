@@ -1,5 +1,6 @@
 package com.cdac.dosimeter_visualization.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -28,6 +29,7 @@ public class DosimeterAssignment {
     private LocalDateTime assignedAt;
     private LocalDateTime releasedAt;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "assignment", cascade = CascadeType.ALL)
     private List<DosimeterReading> readings;
 }

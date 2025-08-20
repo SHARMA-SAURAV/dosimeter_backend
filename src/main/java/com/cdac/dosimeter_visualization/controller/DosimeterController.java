@@ -92,8 +92,8 @@ public class DosimeterController {
         String filename = "dosimeter_readings_" + deviceId + ".csv";
         response.setHeader(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + filename + "\"");
 
-        List<DosimeterReading> readings = dosimeterService.getReadingsByDeviceId(deviceId);
-        csvExporter.export(response.getWriter(), readings);  // ✅ Correct order
+        Optional<Dosimeter> readings = dosimeterService.getReadingsByDeviceId(deviceId);
+//        csvExporter.export(response.getWriter(), readings);  // ✅ Correct order
     }
 
 

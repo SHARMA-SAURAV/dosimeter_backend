@@ -16,17 +16,22 @@ import java.time.LocalTime;
 @NoArgsConstructor
 @AllArgsConstructor
 public class DosimeterReading {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String cpm;
-    private LocalDate date;
-    private LocalTime time;
-    private String battery;
-    private String status;
+    private double cpm;                 // numeric for analytics
+    private LocalDateTime timestamp;    // instead of separate date + time
+    private int battery;                // battery percentage (0-100)
 
+    @Enumerated(EnumType.STRING)
+    private Status status;              // better than free-text
 
     @ManyToOne
     private DosimeterAssignment assignment;
+
+    public enum Status {
+        ACTIVE, INACTIVE, ERROR
+    }
 }

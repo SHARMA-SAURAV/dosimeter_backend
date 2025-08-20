@@ -1,5 +1,6 @@
 package com.cdac.dosimeter_visualization.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
@@ -17,7 +18,8 @@ public class Dosimeter {
     private String deviceId; // unique ID like "DOCI_001"
 
     private String hash;
-
+    private boolean active;
+    @JsonIgnore
     @OneToMany(mappedBy = "dosimeter")
     private List<DosimeterAssignment> assignments;
 
