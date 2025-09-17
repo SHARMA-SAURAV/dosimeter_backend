@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.ArrayList; // ✅
 import java.util.List;
 
 @Data
@@ -30,6 +31,6 @@ public class DosimeterAssignment {
     private LocalDateTime releasedAt;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "assignment", cascade = CascadeType.ALL)
-    private List<DosimeterReading> readings;
+    @OneToMany(mappedBy = "assignment", cascade = CascadeType.ALL, orphanRemoval = true) // ✅ orphanRemoval
+    private List<DosimeterReading> readings = new ArrayList<>(); // ✅ init
 }

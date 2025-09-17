@@ -1,21 +1,11 @@
 package com.cdac.dosimeter_visualization.dto;
 
-
-import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
+import java.time.LocalDateTime;
 
 @Data
-@NoArgsConstructor
-@AllArgsConstructor
 public class DosimeterReadingRequestDTO {
     private String deviceId;
-    private String cpm;
-    private String date;
-    private String time;
-    private String battery;
-    private String status;
-
-    // Getters and Setters
+    private Double cpm;
+    private LocalDateTime timestamp;
 }
-

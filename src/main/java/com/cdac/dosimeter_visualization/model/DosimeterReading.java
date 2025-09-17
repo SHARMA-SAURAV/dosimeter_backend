@@ -1,37 +1,51 @@
 package com.cdac.dosimeter_visualization.model;
 
-//package com.example.dosimeter.model;
-
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.LocalTime;
 
-@Data
 @Entity
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
 public class DosimeterReading {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private double cpm;                 // numeric for analytics
-    private LocalDateTime timestamp;    // instead of separate date + time
-    private int battery;                // battery percentage (0-100)
+    private String deviceId;
+    private Double cpm;
+    private LocalDateTime timestamp;
 
-    @Enumerated(EnumType.STRING)
-    private Status status;              // better than free-text
+    private String time;
+    private String battery;
+    private String status;
 
     @ManyToOne
-    private DosimeterAssignment assignment;
+    @JoinColumn(name = "assignment_id")
+    private DosimeterAssignment assignment; // Link to user-device assignment
 
-    public enum Status {
-        ACTIVE, INACTIVE, ERROR
+    // ✅ Track if this reading triggered an alert
+    private boolean alertTriggered = false;
+
+    // ✅ Add radiation level categorization
+    private String radiationLevel; // LOW, NORMAL, HIGH, CRITICAL
+
+    // Helper method to determine radiation level
+    public void updateRadiationLevel() {
+        if (cpm == null) {
+            this.radiationLevel = "UNKNOWN";
+        } else if (cpm < 50) {
+            this.radiationLevel = "LOW";
+        } else if (cpm <= 100) {
+            this.radiationLevel = "NORMAL";
+        } else if (cpm <= 200) {
+            this.radiationLevel = "HIGH";
+        } else {
+            this.radiationLevel = "CRITICAL";
+        }
     }
 }
